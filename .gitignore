@@ -1,0 +1,6 @@
+app/connection/
+app/identity/
+app/node_modules
+app/temp
+app/wallet
+chaincode/vendor
