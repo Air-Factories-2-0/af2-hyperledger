@@ -113,7 +113,7 @@ func stripSpaces(str string) string {
 
 // calcola e restituisce il risultato eseguendo lo script di python
 func calculateResult(a string, b string) (int, error) {
-	cmd := exec.Command("python", "/go/script.py", a, b)
+	cmd := exec.Command("python", "/python/scripts/script.py", a, b)
 
 	out, err := cmd.Output()
 	if err != nil {
