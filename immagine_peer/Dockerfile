@@ -23,12 +23,13 @@ RUN apt-get install jq wget gcc -y
 RUN apt-get install python3 -y
 # installazione della libreria
 # copia script
-COPY script.py .
+#COPY script.py .
 
 
 ENV FABRIC_CFG_PATH /etc/hyperledger/fabric
 VOLUME /etc/hyperledger/fabric
 VOLUME /var/hyperledger
+VOLUME /python/scripts
 COPY --from=peer /go/src/github.com/hyperledger/fabric/build/bin /usr/local/bin
 COPY --from=peer /go/src/github.com/hyperledger/fabric/sampleconfig/msp ${FABRIC_CFG_PATH}/msp
 COPY --from=peer /go/src/github.com/hyperledger/fabric/sampleconfig/core.yaml ${FABRIC_CFG_PATH}
