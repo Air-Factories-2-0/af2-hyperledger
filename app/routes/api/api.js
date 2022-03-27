@@ -5,6 +5,7 @@ const { getConnection } = require('../../connection');
 
 const user = "utente";
 const org = "org1";
+
 router.post('/asset', async (req, res) => {
     // const transactionName = "SaveAltAsset2";
     const transactionName = "SaveAsset";
@@ -13,12 +14,11 @@ router.post('/asset', async (req, res) => {
     
     try {
         const conn = await getConnection(user, org); 
-        conn.contract.submitTransaction(transactionName, key, body.gcode, body.snapshot, body.piece);
+        conn.contract.submitTransaction(transactionName, key, body.gcode, body.snapshot, body.piece, body.layer);
         res.status(201).json({"message": "asset saved"});
     } catch (error) {
         res.status(500).json({"message": `error saving asset: ${error}`});
     }
-
 });
 
 router.get('/asset', async (req, res) => {

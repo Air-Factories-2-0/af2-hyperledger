@@ -17,9 +17,9 @@ type AssetUsingHistory struct {
 	Snapshot string `json:"snapshot"`
 }
 
-func (sc *SmartContract) SaveAssetUsingHistory(ctx contractapi.TransactionContextInterface, key string, gcode string, snapshot string, piece int) error {
+func (sc *SmartContract) SaveAssetUsingHistory(ctx contractapi.TransactionContextInterface, key string, gcode string, snapshot string, piece int, layer string) error {
 
-	result, err := getResult(gcode, snapshot)
+	result, err := getResult(gcode, snapshot, layer)
 
 	if err != nil {
 		return err

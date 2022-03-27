@@ -20,10 +20,16 @@ FROM peer-base
 
 RUN apt-get update
 RUN apt-get install jq wget gcc -y
-RUN apt-get install python3 -y
-# installazione della libreria
-# copia script
-#COPY script.py .
+RUN apt install wget software-properties-common build-essential libnss3-dev zlib1g-dev libgdbm-dev libncurses5-dev   libssl-dev libffi-dev libreadline-dev libsqlite3-dev libbz2-dev
+RUN wget https://www.python.org/ftp/python/3.9.10/Python-3.9.10.tgz
+RUN tar xvf Python-3.9.10.tgz
+RUN .Python-3.9.10/configure --enable-optimizations
+RUN .Python-3.9.10/make altinstall
+
+RUN apt-get install python3-pip -y
+RUN apt-get install python3-opencv -y
+RUN pip install matplotlib 
+RUN pip install rembg 
 
 
 ENV FABRIC_CFG_PATH /etc/hyperledger/fabric

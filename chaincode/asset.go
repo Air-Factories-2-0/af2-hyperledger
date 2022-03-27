@@ -50,7 +50,7 @@ type AssetQueryResultItem struct {
 
 // legge i file da ipfs, scrive i contenuti su file temporanei, quindi li passa alla
 // funzione per calcolare il risultato
-func getResult(gcode string, snapshot string) (int, error) {
+func getResult(gcode string, snapshot string, layer string) (int, error) {
 	sh := shell.NewShell("ipfs_host:5001")
 
 	// lettura dei file di ipfs
@@ -91,7 +91,7 @@ func getResult(gcode string, snapshot string) (int, error) {
 		return -1, err
 	}
 
-	result, err := calculateResult(gcodeFile.Name(), snapshotFile.Name())
+	result, err := calculateResult(snapshotFile.Name(), gcodeFile.Name(), layer)
 
 	if err != nil {
 		return -1, err
@@ -112,8 +112,11 @@ func stripSpaces(str string) string {
 }
 
 // calcola e restituisce il risultato eseguendo lo script di python
-func calculateResult(a string, b string) (int, error) {
-	cmd := exec.Command("python", "/python/scripts/script.py", a, b)
+func calculateResult(snapshot string, gcode string, layer string) (int, error) {
+
+	cmd := exec.Command("/python/scripts/script.sh", snapshot, gcode, layer)
+
+	//cmd := exec.Command("python", "/python/scripts/script.py", snapshot, gcode)
 
 	out, err := cmd.Output()
 	if err != nil {

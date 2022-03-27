@@ -11,8 +11,8 @@ type SmartContract struct {
 	contractapi.Contract
 }
 
-func (sc *SmartContract) SaveAsset(ctx contractapi.TransactionContextInterface, key string, gcode string, snapshot string, piece int) error {
-	r, err := getResult(gcode, snapshot)
+func (sc *SmartContract) SaveAsset(ctx contractapi.TransactionContextInterface, key string, gcode string, snapshot string, piece int, layer string) error {
+	r, err := getResult(gcode, snapshot, layer)
 	if err != nil {
 		return err
 	}
